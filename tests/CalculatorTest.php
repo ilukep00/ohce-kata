@@ -16,9 +16,9 @@ final class CalculatorTest extends TestCase
     {
         $calculator = new Calculator();
 
-        $result = $calculator->add(1, 2);
+        $result = $calculator->add(2, 2);
 
-        $this->assertEquals(3, $result);
+        $this->assertEquals(4, $result);
     }
 
     /**
