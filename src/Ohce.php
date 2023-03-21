@@ -20,6 +20,7 @@ class Ohce
             } elseif ($hour >= 6 && $hour < 12) {
                 return "¡Buenos días " . $name . "!";
             }
+            return "¡Buenas tardes " . $name . "!";
         }
         $inputReverse = strrev($inputString);
         if ($inputString == $inputReverse) {
