@@ -17,6 +17,8 @@ class Ohce
             $hour =  $this->hourManager->returnActualHour();
             if ($hour >= 20 || $hour < 6) {
                 return "¡Buenas noches " . $name . "!";
+            } else if($hour >= 6 && $hour < 12) {
+                return "¡Buenos días " . $name . "!";
             }
         }
         $inputReverse = strrev($inputString);

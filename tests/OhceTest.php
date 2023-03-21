@@ -49,4 +49,15 @@ final class OhceTest extends TestCase
 
         $this->assertEquals("¡Buenas noches luke!", $returnMessage);
     }
+    /**
+     * @test
+     */
+    public function returnBuenosDiasIfHourIsBetween6And12()
+    {
+        $this->hourManager->allows()->returnActualHour()->andReturn(11);
+
+        $returnMessage = $this->ohce->ohceResponse("ohce luke");
+
+        $this->assertEquals("¡Buenos días luke!", $returnMessage);
+    }
 }
