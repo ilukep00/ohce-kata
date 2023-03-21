@@ -13,10 +13,11 @@ final class OhceTest extends TestCase
 {
     private HourManager $hourManager;
     private Ohce $ohce;
+    private Mockery $mockery;
     protected function setUp(): void
     {
-        $mockery = new Mockery();
-        $this->hourManager = $mockery::mock(HourManager::class);
+        $this->mockery = new Mockery();
+        $this->hourManager = $this->mockery::mock(HourManager::class);
         $this->ohce = new Ohce($this->hourManager);
     }
 
@@ -70,5 +71,21 @@ final class OhceTest extends TestCase
         $returnMessage = $this->ohce->ohceResponse("ohce luke");
 
         $this->assertEquals("¡Buenas tardes luke!", $returnMessage);
+    }
+    /**
+     * @test
+     */
+    public function returnAdiosIsWhenWeSendStop()
+    {
+        $hourManager = $this->mockery::spy(HourManager::class);
+        $ohce = new Ohce($hourManager);
+
+        $ohce->ohceResponse("ohce luke");
+
+        $returnMessage =  $ohce->ohceResponse("Stop!");
+
+        $hourManager->shouldHaveReceived()->returnActualHour();
+
+        $this->assertEquals("Adios luke", $returnMessage);
     }
 }
