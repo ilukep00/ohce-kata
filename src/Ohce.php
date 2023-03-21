@@ -4,13 +4,25 @@ namespace Deg540\PHPTestingBoilerplate;
 
 class Ohce
 {
-    public function ohceResponse(String $inputString):String
+    private HourManager $hourManager;
+    public function __construct(HourManager $hourManager)
     {
-       $inputReverse = strrev($inputString);
-       if($inputString == $inputReverse){
-           return "¡Bonita palabra!";
-       }else{
-           return "";
-       }
+        $this->hourManager = $hourManager;
+    }
+
+    public function ohceResponse(string $inputString): string
+    {
+        if (str_starts_with($inputString, "ohce")) {
+            $name = explode(" ", $inputString)[1];
+            $hour =  $this->hourManager->returnActualHour();
+            if ($hour >= 20 || $hour < 6) {
+                return "¡Buenas noches " . $name . "!";
+            }
+        }
+        $inputReverse = strrev($inputString);
+        if ($inputString == $inputReverse) {
+            return "¡Bonita palabra!";
+        }
+        return $inputReverse;
     }
 }

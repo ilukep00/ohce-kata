@@ -4,19 +4,49 @@ declare(strict_types=1);
 
 namespace Deg540\PHPTestingBoilerplate\Test;
 
+use Deg540\PHPTestingBoilerplate\HourManager;
 use Deg540\PHPTestingBoilerplate\Ohce;
 use PHPUnit\Framework\TestCase;
+use Mockery;
 
 final class OhceTest extends TestCase
 {
+    private HourManager $hourManager;
+    private Ohce $ohce;
+    protected function setUp(): void
+    {
+        $mockery = new Mockery();
+        $this->hourManager = $mockery::mock(HourManager::class);
+        $this->ohce = new Ohce($this->hourManager);
+    }
+
     /**
      * @test
      */
-     public function returnBuenaPalabraIfInputIsPalindrome(){
-        $ohce = new Ohce();
+    public function returnBonitaPalabraIfInputIsPalindrome()
+    {
+        $returnMessage = $this->ohce->ohceResponse("oto");
 
-        $returnMessage = $ohce ->ohceResponse("oto");
+        $this->assertEquals("¡Bonita palabra!", $returnMessage);
+    }
+    /**
+     * @test
+     */
+    public function returnReverseStringIfInputIsNotPalindrome()
+    {
+        $returnMessage = $this->ohce->ohceResponse("hola");
 
-         $this->assertEquals("¡Bonita palabra!",$returnMessage);
+        $this->assertEquals("aloh", $returnMessage);
+    }
+    /**
+     * @test
+     */
+    public function returnBuenasNochesIfHourIsBetween20And6()
+    {
+        $this->hourManager->allows()->returnActualHour()->andReturn(21);
+
+        $returnMessage = $this->ohce->ohceResponse("ohce luke");
+
+        $this->assertEquals("¡Buenas noches luke!", $returnMessage);
     }
 }
