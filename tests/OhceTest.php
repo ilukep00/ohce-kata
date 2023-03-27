@@ -28,7 +28,7 @@ final class OhceTest extends TestCase
     {
         $returnMessage = $this->ohce->ohceResponse("oto");
 
-        $this->assertEquals("oto\n¡Bonita palabra!", $returnMessage);
+        $this->assertEquals("oto\n" . $this->ohce::PALINDROME_MESSAGE, $returnMessage);
     }
     /**
      * @test
@@ -48,7 +48,7 @@ final class OhceTest extends TestCase
 
         $returnMessage = $this->ohce->ohceResponse("ohce luke");
 
-        $this->assertEquals("¡Buenas noches luke!", $returnMessage);
+        $this->assertEquals($this->ohce::GREETING_MESSAGE_NOCHE . "luke!", $returnMessage);
     }
     /**
      * @test
@@ -59,7 +59,7 @@ final class OhceTest extends TestCase
 
         $returnMessage = $this->ohce->ohceResponse("ohce luke");
 
-        $this->assertEquals("¡Buenos días luke!", $returnMessage);
+        $this->assertEquals($this->ohce::GREETING_MESSAGE_DIA . "luke!", $returnMessage);
     }
     /**
      * @test
@@ -70,7 +70,7 @@ final class OhceTest extends TestCase
 
         $returnMessage = $this->ohce->ohceResponse("ohce luke");
 
-        $this->assertEquals("¡Buenas tardes luke!", $returnMessage);
+        $this->assertEquals($this->ohce::GREETING_MESSAGE_TARDE . "luke!", $returnMessage);
     }
     /**
      * @test
@@ -86,6 +86,6 @@ final class OhceTest extends TestCase
 
         $hourManager->shouldHaveReceived()->returnActualHour();
 
-        $this->assertEquals("Adios luke", $returnMessage);
+        $this->assertEquals($ohce::STOP_MESSAGE . "luke", $returnMessage);
     }
 }

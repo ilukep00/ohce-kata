@@ -6,6 +6,11 @@ class Ohce
 {
     private HourManager $hourManager;
     private string $name;
+    public const STOP_MESSAGE = "Adios ";
+    public const PALINDROME_MESSAGE = "¡Bonita palabra!";
+    public const GREETING_MESSAGE_NOCHE = "¡Buenas noches ";
+    public const GREETING_MESSAGE_TARDE = "¡Buenas tardes ";
+    public const GREETING_MESSAGE_DIA = "¡Buenos días ";
     public function __construct(HourManager $hourManager)
     {
         $this->hourManager = $hourManager;
@@ -18,11 +23,11 @@ class Ohce
             return $this->returnGreeting($inputString);
         }
         if ($this->isStop($inputString)) {
-            return "Adios " . $this->name;
+            return self::STOP_MESSAGE . $this->name;
         }
 
         if ($this->isPalindrome($inputString)) {
-            return strrev($inputString) . "\n¡Bonita palabra!";
+            return strrev($inputString) . "\n" . self::PALINDROME_MESSAGE;
         }
         return strrev($inputString);
     }
@@ -37,11 +42,11 @@ class Ohce
         $this->name = explode(" ", $inputString)[1];
         $hour =  $this->hourManager->returnActualHour();
         if ($hour >= 20 || $hour < 6) {
-            return "¡Buenas noches " . $this->name . "!";
+            return self::GREETING_MESSAGE_NOCHE . $this->name . "!";
         } elseif ($hour >= 6 && $hour < 12) {
-            return "¡Buenos días " . $this->name . "!";
+            return self::GREETING_MESSAGE_DIA . $this->name . "!";
         }
-        return "¡Buenas tardes " . $this->name . "!";
+        return self::GREETING_MESSAGE_TARDE . $this->name . "!";
     }
 
     public function isStop(string $inputString): bool
