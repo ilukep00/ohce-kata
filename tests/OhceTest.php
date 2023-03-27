@@ -28,7 +28,7 @@ final class OhceTest extends TestCase
     {
         $returnMessage = $this->ohce->ohceResponse("oto");
 
-        $this->assertEquals("¡Bonita palabra!", $returnMessage);
+        $this->assertEquals("oto\n¡Bonita palabra!", $returnMessage);
     }
     /**
      * @test
@@ -44,7 +44,7 @@ final class OhceTest extends TestCase
      */
     public function returnBuenasNochesIfHourIsBetween20And6()
     {
-        $this->hourManager->allows()->returnActualHour()->andReturn(21);
+        $this->hourManager->expects()->returnActualHour()->andReturn(21);
 
         $returnMessage = $this->ohce->ohceResponse("ohce luke");
 
@@ -55,7 +55,7 @@ final class OhceTest extends TestCase
      */
     public function returnBuenosDiasIfHourIsBetween6And12()
     {
-        $this->hourManager->allows()->returnActualHour()->andReturn(11);
+        $this->hourManager->expects()->returnActualHour()->andReturn(11);
 
         $returnMessage = $this->ohce->ohceResponse("ohce luke");
 
@@ -66,7 +66,7 @@ final class OhceTest extends TestCase
      */
     public function returnBuenasTardesIfHourIsBetween12And20()
     {
-        $this->hourManager->allows()->returnActualHour()->andReturn(14);
+        $this->hourManager->expects()->returnActualHour()->andReturn(14);
 
         $returnMessage = $this->ohce->ohceResponse("ohce luke");
 

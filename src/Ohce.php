@@ -28,7 +28,7 @@ class Ohce
         }
         $inputReverse = strrev($inputString);
         if ($inputString == $inputReverse) {
-            return "¡Bonita palabra!";
+            return $inputReverse . "\n¡Bonita palabra!";
         }
         return $inputReverse;
     }
