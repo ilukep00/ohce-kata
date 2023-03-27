@@ -24,7 +24,7 @@ final class OhceTest extends TestCase
     /**
      * @test
      */
-    public function returnBonitaPalabraIfInputIsPalindrome()
+    public function returnLikesWordIfPalindrome()
     {
         $returnMessage = $this->ohce->ohceResponse("oto");
 
@@ -33,7 +33,7 @@ final class OhceTest extends TestCase
     /**
      * @test
      */
-    public function returnReverseStringIfInputIsNotPalindrome()
+    public function returnReverseWordIfNotPalindrome()
     {
         $returnMessage = $this->ohce->ohceResponse("hola");
 
